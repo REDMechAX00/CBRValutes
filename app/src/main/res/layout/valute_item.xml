@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/valute_icon"
+        android:layout_width="@dimen/valute_icon_width"
+        android:layout_height="@dimen/valute_icon_height"
+        android:src="@drawable/ic_russian_federation"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/valute_char_code"
+        style="@style/normalText"
+        app:layout_constraintStart_toEndOf="@id/valute_icon"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/valute_name"
+        tools:text="Char code" />
+
+    <TextView
+        android:id="@+id/valute_name"
+        style="@style/smallText"
+        app:layout_constraintStart_toEndOf="@id/valute_icon"
+        app:layout_constraintTop_toBottomOf="@id/valute_char_code"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:text="Name" />
+
+    <TextView
+        android:id="@+id/valute_date"
+        style="@style/verySmallText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/valute_value"
+        tools:text="02/08/2022" />
+
+    <TextView
+        android:id="@+id/valute_value"
+        style="@style/normalText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/valute_date"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:text="60,029" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
