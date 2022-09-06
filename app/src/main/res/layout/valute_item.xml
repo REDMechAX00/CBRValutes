@@ -2,8 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    style="@style/recyclerViewButton">
 
     <ImageView
         android:id="@+id/valute_icon"
@@ -13,11 +12,19 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:id="@+id/valute_nominal"
+        style="@style/normalText"
+        app:layout_constraintStart_toEndOf="@id/valute_icon"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/valute_name"
+        tools:text="Nominal" />
 
     <TextView
         android:id="@+id/valute_char_code"
         style="@style/normalText"
-        app:layout_constraintStart_toEndOf="@id/valute_icon"
+        android:layout_marginStart="3dp"
+        app:layout_constraintStart_toEndOf="@id/valute_nominal"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@id/valute_name"
         tools:text="Char code" />
@@ -31,18 +38,10 @@
         tools:text="Name" />
 
     <TextView
-        android:id="@+id/valute_date"
-        style="@style/verySmallText"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/valute_value"
-        tools:text="02/08/2022" />
-
-    <TextView
         android:id="@+id/valute_value"
         style="@style/normalText"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/valute_date"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         tools:text="60,029" />
 

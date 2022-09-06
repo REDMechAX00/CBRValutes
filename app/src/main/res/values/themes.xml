@@ -38,7 +38,11 @@
     <item name="android:layout_marginStart">@dimen/app_margin</item>
 </style>
 
-    <dimen name="text_normal">16sp</dimen>
-    <dimen name="text_small">14sp</dimen>
-    <dimen name="text_very_small">12sp</dimen>
+    <style name="recyclerViewButton">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+        <item name="android:background">@drawable/ripple_effect</item>
+    </style>
 </resources>

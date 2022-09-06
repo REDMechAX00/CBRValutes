@@ -1,4 +1,4 @@
-package com.redmechax00.parsexml
+package com.redmechax00.CbrValuteRate
 
 import org.xmlpull.v1.XmlPullParser
 import org.xmlpull.v1.XmlPullParserException
@@ -14,6 +14,7 @@ class XmlPullParserHandler {
 
     fun parse(strXml: String): ArrayList<ValuteXmlData> {
         try {
+            println(strXml)
             val factory = XmlPullParserFactory.newInstance()
             factory.isNamespaceAware = true
             val parser = factory.newPullParser()
@@ -28,15 +29,6 @@ class XmlPullParserHandler {
                     XmlPullParser.START_TAG -> {
                         if (tagname.equals("ValCurs", ignoreCase = true)) {
                             newDate = parser.getAttributeValue(0)
-
-                            //добавить рубль
-                            val rubValute = ValuteXmlData()
-                            rubValute.apply {
-                                charCode = "RUB"
-                                value = "1"
-                                date = newDate
-                            }
-                            listValutesXmlData.add(rubValute)
 
                         } else if (tagname.equals("Valute", ignoreCase = true)) {
                             // создать новый класс валют
@@ -63,10 +55,11 @@ class XmlPullParserHandler {
                             valuteXmlData!!.value = text
                         } else if (tagname.equals("Valute", ignoreCase = true)) {
                             //добавить объект валюты в лист
-                            valuteXmlData!!.date = newDate
-                            valuteXmlData?.let { listValutesXmlData.add(it) }
+                            valuteXmlData?.let {
+                                it.date = newDate
+                                listValutesXmlData.add(it)
+                            }
                         } else if (tagname.equals("ValCurs", ignoreCase = true)) {
-
                         }
                     }
                     else -> {}

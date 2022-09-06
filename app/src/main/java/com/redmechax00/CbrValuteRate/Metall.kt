@@ -1,4 +1,4 @@
-package com.redmechax00.parsexml
+package com.redmechax00.CbrValuteRate
 
 class Metall {
     //1 -> Золото

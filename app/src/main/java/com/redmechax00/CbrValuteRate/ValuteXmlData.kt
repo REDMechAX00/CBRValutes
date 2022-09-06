@@ -1,4 +1,4 @@
-package com.redmechax00.parsexml
+package com.redmechax00.CbrValuteRate
 
 data class ValuteXmlData(
     var attrID: String = "",
@@ -10,6 +10,6 @@ data class ValuteXmlData(
     var numCode: String = ""
 ) {
     override fun toString(): String {
-        return "Char code = $charCode\nName = ${localeValuteName(name!!)}\nValue = $value\nNominal = $nominal"
+        return "Char code = $charCode\nName = ${localeValuteName(name)}\nValue = $value\nNominal = $nominal"
     }
 }

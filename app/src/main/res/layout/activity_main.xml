@@ -6,45 +6,73 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <DatePicker
-        android:id="@+id/date_picker"
-        android:visibility="gone"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:datePickerMode="spinner"
-        android:calendarViewShown="false"
-        app:layout_constraintBottom_toTopOf="@id/btn_parse"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
-
-    <Button
-        android:id="@+id/btn_parse"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/main_valute_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:text="Get Valutes"
         android:visibility="gone"
-        android:textColor="@color/color_white"
-        android:textSize="16sp"
-        app:layout_constraintTop_toBottomOf="@id/date_picker"
-        app:layout_constraintBottom_toTopOf="@id/text_link"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/text_link"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:gravity="center"
-        android:visibility="gone"
-        android:textColor="@color/color_black"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@id/swipe_refresh"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_parse" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/main_valute_icon"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:src="@drawable/ic_russian_federation"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/main_valute_nominal"
+            style="@style/normalText"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/main_valute_name"
+            app:layout_constraintStart_toEndOf="@id/main_valute_icon"
+            app:layout_constraintTop_toTopOf="@id/main_valute_icon"
+            tools:text="1" />
+
+        <TextView
+            android:id="@+id/main_valute_char_code"
+            style="@style/normalText"
+            android:layout_marginStart="3dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/main_valute_name"
+            app:layout_constraintStart_toEndOf="@id/main_valute_nominal"
+            app:layout_constraintTop_toTopOf="@id/main_valute_icon"
+            tools:text="@string/valute_char_code_rub" />
+
+        <TextView
+            android:id="@+id/main_valute_name"
+            style="@style/normalText"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/main_valute_icon"
+            app:layout_constraintStart_toEndOf="@id/main_valute_icon"
+            app:layout_constraintTop_toBottomOf="@id/main_valute_char_code"
+            tools:text="@string/valute_name_rub" />
+
+        <TextView
+            android:id="@+id/main_valute_date"
+            style="@style/normalText"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/main_valute_value"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/main_valute_char_code"
+            tools:text="02.08.2022" />
+
+        <TextView
+            android:id="@+id/main_valute_value"
+            style="@style/normalText"
+            android:layout_marginEnd="@dimen/app_margin"
+            android:textSize="26sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/main_valute_date"
+            tools:text="=" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipe_refresh"
@@ -53,8 +81,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_link"
-        >
+        app:layout_constraintTop_toBottomOf="@id/main_valute_container">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view"
@@ -63,10 +90,9 @@
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:layout_margin="5dp"
-             tools:listitem="@layout/valute_item" />
+            tools:listitem="@layout/valute_item" />
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

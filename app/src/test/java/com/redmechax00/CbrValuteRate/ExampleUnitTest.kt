@@ -1,4 +1,4 @@
-package com.redmechax00.parsexml
+package com.redmechax00.CbrValuteRate
 
 import org.junit.Test
 

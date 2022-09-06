@@ -1,212 +1,210 @@
-package com.redmechax00.parsexml
+package com.redmechax00.CbrValuteRate
 
 import android.annotation.SuppressLint
 
 object ValuteObject {
 
+    var countId:Int = 0
+
     @SuppressLint("UseCompatLoadingForDrawables")
-    fun getUsers() = listOf(
+    fun getUsers() = arrayListOf(
         Valute(
-            0,
+            getUid(),
             APP_ACTIVITY.getString(R.string.valute_char_code_aud),
             APP_ACTIVITY.getString(R.string.valute_name_aud),
             APP_ACTIVITY.getDrawable(R.drawable.ic_australia)
         ),
         Valute(
-            1,
+            getUid(),
             APP_ACTIVITY.getString(R.string.valute_char_code_azn),
             APP_ACTIVITY.getString(R.string.valute_name_azn),
             APP_ACTIVITY.getDrawable(R.drawable.ic_azerbaijan)
 
         ),
         Valute(
-            2,
+            getUid(),
             APP_ACTIVITY.getString(R.string.valute_char_code_gbp),
             APP_ACTIVITY.getString(R.string.valute_name_gbp),
             APP_ACTIVITY.getDrawable(R.drawable.ic_great_britain)
 
         ),
         Valute(
-            3,
+            getUid(),
             APP_ACTIVITY.getString(R.string.valute_char_code_amd),
             APP_ACTIVITY.getString(R.string.valute_name_amd),
             APP_ACTIVITY.getDrawable(R.drawable.ic_armenia)
 
         ),
         Valute(
-            4,
-            APP_ACTIVITY.getString(R.string.valute_char_code_rub),
-            APP_ACTIVITY.getString(R.string.valute_name_rub),
-            APP_ACTIVITY.getDrawable(R.drawable.ic_russian_federation)
-        ),
-        Valute(
-            5,
+            getUid(),
             APP_ACTIVITY.getString(R.string.valute_char_code_byn),
             APP_ACTIVITY.getString(R.string.valute_name_byn),
             APP_ACTIVITY.getDrawable(R.drawable.ic_belarus)
         ),
         Valute(
-            6,
+            getUid(),
             APP_ACTIVITY.getString(R.string.valute_char_code_bgn),
             APP_ACTIVITY.getString(R.string.valute_name_bgn),
             APP_ACTIVITY.getDrawable(R.drawable.ic_bulgaria)
         ),
         Valute(
-            7,
+            getUid(),
             APP_ACTIVITY.getString(R.string.valute_char_code_brl),
             APP_ACTIVITY.getString(R.string.valute_name_brl),
             APP_ACTIVITY.getDrawable(R.drawable.ic_brazil)
         ),
         Valute(
-            8,
+            getUid(),
             APP_ACTIVITY.getString(R.string.valute_char_code_huf),
             APP_ACTIVITY.getString(R.string.valute_name_huf),
             APP_ACTIVITY.getDrawable(R.drawable.ic_hungary)
         ),
         Valute(
-            9,
+            getUid(),
             APP_ACTIVITY.getString(R.string.valute_char_code_hkd),
             APP_ACTIVITY.getString(R.string.valute_name_hkd),
             APP_ACTIVITY.getDrawable(R.drawable.ic_hongkong)
         ),
         Valute(
-            10,
+            getUid(),
             APP_ACTIVITY.getString(R.string.valute_char_code_dkk),
             APP_ACTIVITY.getString(R.string.valute_name_dkk),
             APP_ACTIVITY.getDrawable(R.drawable.ic_denmark)
         ),
         Valute(
-            11,
+            getUid(),
             APP_ACTIVITY.getString(R.string.valute_char_code_usd),
             APP_ACTIVITY.getString(R.string.valute_name_usd),
             APP_ACTIVITY.getDrawable(R.drawable.ic_usa)
         ),
         Valute(
-            12,
+            getUid(),
             APP_ACTIVITY.getString(R.string.valute_char_code_eur),
             APP_ACTIVITY.getString(R.string.valute_name_eur),
             APP_ACTIVITY.getDrawable(R.drawable.ic_europe)
         ),
         Valute(
-            13,
+            getUid(),
             APP_ACTIVITY.getString(R.string.valute_char_code_inr),
             APP_ACTIVITY.getString(R.string.valute_name_inr),
             APP_ACTIVITY.getDrawable(R.drawable.ic_india)
         ),
         Valute(
-            14,
+            getUid(),
             APP_ACTIVITY.getString(R.string.valute_char_code_kzt),
             APP_ACTIVITY.getString(R.string.valute_name_kzt),
             APP_ACTIVITY.getDrawable(R.drawable.ic_kazakhstan)
         ),
         Valute(
-            15,
+            getUid(),
             APP_ACTIVITY.getString(R.string.valute_char_code_kgs),
             APP_ACTIVITY.getString(R.string.valute_name_kgs),
             APP_ACTIVITY.getDrawable(R.drawable.ic_kyrgyzstan)
         ),
         Valute(
-            16,
+            getUid(),
             APP_ACTIVITY.getString(R.string.valute_char_code_cny),
             APP_ACTIVITY.getString(R.string.valute_name_cny),
             APP_ACTIVITY.getDrawable(R.drawable.ic_china)
         ),
         Valute(
-            17,
+            getUid(),
             APP_ACTIVITY.getString(R.string.valute_char_code_mdl),
             APP_ACTIVITY.getString(R.string.valute_name_mdl),
             APP_ACTIVITY.getDrawable(R.drawable.ic_moldova_circular)
         ),
         Valute(
-            18,
+            getUid(),
             APP_ACTIVITY.getString(R.string.valute_char_code_nok),
             APP_ACTIVITY.getString(R.string.valute_name_nok),
             APP_ACTIVITY.getDrawable(R.drawable.ic_norway)
         ),
         Valute(
-            19,
+            getUid(),
             APP_ACTIVITY.getString(R.string.valute_char_code_pln),
             APP_ACTIVITY.getString(R.string.valute_name_pln),
             APP_ACTIVITY.getDrawable(R.drawable.ic_poland)
         ),
         Valute(
-            20,
+            getUid(),
             APP_ACTIVITY.getString(R.string.valute_char_code_ron),
             APP_ACTIVITY.getString(R.string.valute_name_ron),
             APP_ACTIVITY.getDrawable(R.drawable.ic_romania)
         ),
         Valute(
-            21,
+            getUid(),
             APP_ACTIVITY.getString(R.string.valute_char_code_xdr),
             APP_ACTIVITY.getString(R.string.valute_name_xdr),
             APP_ACTIVITY.getDrawable(androidx.core.R.drawable.notification_icon_background)
         ),
         Valute(
-            22,
+            getUid(),
             APP_ACTIVITY.getString(R.string.valute_char_code_sgd),
             APP_ACTIVITY.getString(R.string.valute_name_sgd),
             APP_ACTIVITY.getDrawable(R.drawable.ic_singapore)
         ),
         Valute(
-            23,
+            getUid(),
             APP_ACTIVITY.getString(R.string.valute_char_code_tjs),
             APP_ACTIVITY.getString(R.string.valute_name_tjs),
             APP_ACTIVITY.getDrawable(R.drawable.ic_tajikistan)
         ),
         Valute(
-            24,
+            getUid(),
             APP_ACTIVITY.getString(R.string.valute_char_code_try),
             APP_ACTIVITY.getString(R.string.valute_name_try),
             APP_ACTIVITY.getDrawable(R.drawable.ic_turkey)
         ),
         Valute(
-            25,
+            getUid(),
             APP_ACTIVITY.getString(R.string.valute_char_code_tmt),
             APP_ACTIVITY.getString(R.string.valute_name_tmt),
             APP_ACTIVITY.getDrawable(R.drawable.ic_turkmenistan_circular)
         ),
         Valute(
-            26,
+            getUid(),
             APP_ACTIVITY.getString(R.string.valute_char_code_uzs),
             APP_ACTIVITY.getString(R.string.valute_name_uzs),
             APP_ACTIVITY.getDrawable(R.drawable.ic_uzbekistan)
         ),
         Valute(
-            27,
+            getUid(),
             APP_ACTIVITY.getString(R.string.valute_char_code_czk),
             APP_ACTIVITY.getString(R.string.valute_name_czk),
             APP_ACTIVITY.getDrawable(R.drawable.ic_czech_republic)
         ),
         Valute(
-            28,
+            getUid(),
             APP_ACTIVITY.getString(R.string.valute_char_code_sek),
             APP_ACTIVITY.getString(R.string.valute_name_sek),
             APP_ACTIVITY.getDrawable(R.drawable.ic_sweden)
         ),
         Valute(
-            29,
+            getUid(),
             APP_ACTIVITY.getString(R.string.valute_char_code_chf),
             APP_ACTIVITY.getString(R.string.valute_name_chf),
             APP_ACTIVITY.getDrawable(R.drawable.ic_switzerland)
         ),
         Valute(
-            30,
+            getUid(),
             APP_ACTIVITY.getString(R.string.valute_char_code_zar),
             APP_ACTIVITY.getString(R.string.valute_name_zar),
             APP_ACTIVITY.getDrawable(R.drawable.ic_south_africa)
         ),
         Valute(
-            31,
+            getUid(),
             APP_ACTIVITY.getString(R.string.valute_char_code_krw),
             APP_ACTIVITY.getString(R.string.valute_name_krw),
             APP_ACTIVITY.getDrawable(R.drawable.ic_south_korea)
         ),
         Valute(
-            32,
+            getUid(),
             APP_ACTIVITY.getString(R.string.valute_char_code_jpy),
             APP_ACTIVITY.getString(R.string.valute_name_jpy),
             APP_ACTIVITY.getDrawable(R.drawable.ic_japan)
         )
     )
+
+    private fun getUid(): Int = countId++
 
 }
