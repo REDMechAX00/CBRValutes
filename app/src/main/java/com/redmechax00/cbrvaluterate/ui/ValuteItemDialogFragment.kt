@@ -1,4 +1,4 @@
-package com.redmechax00.CbrValuteRate
+package com.redmechax00.cbrvaluterate.ui
 
 import android.app.Dialog
 import android.graphics.drawable.Drawable

@@ -1,4 +1,4 @@
-package com.redmechax00.CbrValuteRate
+package com.redmechax00.cbrvaluterate
 
 import org.junit.Test
 

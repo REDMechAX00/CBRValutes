@@ -1,4 +1,4 @@
-package com.redmechax00.CbrValuteRate
+package com.redmechax00.cbrvaluterate
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

@@ -1,6 +1,7 @@
-package com.redmechax00.CbrValuteRate
+package com.redmechax00.cbrvaluterate.utilits
 
 import android.annotation.SuppressLint
+import com.redmechax00.cbrvaluterate.MainActivity
 
 @SuppressLint("StaticFieldLeak")
 lateinit var APP_ACTIVITY: MainActivity

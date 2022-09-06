@@ -1,20 +1,26 @@
-package com.redmechax00.CbrValuteRate
+package com.redmechax00.cbrvaluterate
 
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import com.redmechax00.CbrValuteRate.databinding.ActivityMainBinding
-import kotlinx.coroutines.*
+import com.redmechax00.cbrvaluterate.database.ValuteDao
+import com.redmechax00.cbrvaluterate.database.ValuteDatabase
+import com.redmechax00.cbrvaluterate.databinding.ActivityMainBinding
+import com.redmechax00.cbrvaluterate.models.ValuteModel
+import com.redmechax00.cbrvaluterate.recyclerview.RecyclerViewAdapter
+import com.redmechax00.cbrvaluterate.recyclerview.ValuteViewModel
+import com.redmechax00.cbrvaluterate.utilits.*
+import kotlinx.coroutines.DelicateCoroutinesApi
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import java.util.*
-import kotlin.collections.ArrayList
-
 
 class MainActivity : AppCompatActivity() {
 
@@ -22,7 +28,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var mSwipeRefreshLayout: SwipeRefreshLayout
 
     private lateinit var valutes_link: String
-    private lateinit var metall_link: String
+    private lateinit var metal_link: String
 
     //Эта переменная только ради анимации перемещения итема адаптера вместо анимации refresh
     private var adapter_action: Int = ADAPTER_ACTION_UPDATE
@@ -78,23 +84,6 @@ class MainActivity : AppCompatActivity() {
         updateValuteData()
     }
 
-    private fun onListItemClick(position: Int) {
-        /*viewModel.getListValutes().value?.let { arraListValute ->
-            val icon = arraListValute[position].icon
-            val title = arraListValute[position].charCode
-
-            val mValuteItemDialogFragment = ValuteItemDialogFragment(title, icon) { actions ->
-                when (actions) {
-                    DIALOG_ACTION_CHOOSE_MAIN_VALUTE -> {
-
-                    }
-                }
-            }
-            val manager = supportFragmentManager
-            mValuteItemDialogFragment.show(manager, "mValuteItemDialogFragment")
-        }*/
-    }
-
     private fun updateValuteData() {
         mSwipeRefreshLayout.isRefreshing = parse(valutes_link) { listOfXmlValutes ->
             updateData(viewModel, listOfXmlValutes) { updatedData ->
@@ -119,7 +108,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     @OptIn(DelicateCoroutinesApi::class)
-    private fun saveDataToDatabase(newData: ArrayList<Valute>) {
+    private fun saveDataToDatabase(newData: ArrayList<ValuteModel>) {
         GlobalScope.launch(Dispatchers.IO) {
             newData.forEachIndexed { index, valute ->
                 valuteDao.add(valute)
@@ -129,16 +118,16 @@ class MainActivity : AppCompatActivity() {
 
     private fun initAdapter() {
         viewModel = ViewModelProvider(this)[ValuteViewModel::class.java]
-        adapter = RecyclerViewAdapter { position -> onListItemClick(position) }
+        adapter = RecyclerViewAdapter { position -> /*onListItemClick(position)*/ }
 
         //подписываем адаптер на изменения списка
-        viewModel.getListValutes().observe(APP_ACTIVITY, Observer {
+        viewModel.getListValutes().observe(APP_ACTIVITY) {
             it?.let {
                 adapter.refreshItems(adapter_action, it)
                 saveDataToDatabase(it)
                 adapter_action = ADAPTER_ACTION_UPDATE
             }
-        })
+        }
 
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = adapter
@@ -148,13 +137,14 @@ class MainActivity : AppCompatActivity() {
         val today = Calendar.getInstance()
         valutes_link =
             "https://www.cbr.ru/scripts/XML_daily_eng.asp?date_req=${getTodayDate(today)}"
-        metall_link =
+        metal_link =
             "https://www.cbr.ru/scripts/xml_metall.asp?date_req1=${getTodayDate(today)}&date_req2=${
                 getTodayDate(today)
             }"
     }
 
-    private fun moveItems(fromPosition: Int, toPosition: Int) {
+    //Переместить итем с позиции fromPosition на позицию toPosition
+    /*private fun moveItems(fromPosition: Int, toPosition: Int) {
         viewModel.getListValutes().value?.let { listValutes ->
             val item: Valute = listValutes[fromPosition]
             listValutes.removeAt(fromPosition)
@@ -168,7 +158,25 @@ class MainActivity : AppCompatActivity() {
             viewModel.getListValutes().value = listValutes
             adapter.notifyItemMoved(fromPosition, toPosition)
         }
-    }
+    }*/
+
+    //Реализация диалогового окна с выбором действия при нажатии на итем
+    /*private fun onListItemClick(position: Int) {
+        viewModel.getListValutes().value?.let { arrayListValute ->
+            val icon = arrayListValute[position].icon
+            val title = arrayListValute[position].charCode
+
+            val mValuteItemDialogFragment = ValuteItemDialogFragment(title, icon) { actions ->
+                when (actions) {
+                    DIALOG_ACTION_CHOOSE_MAIN_VALUTE -> {
+
+                    }
+                }
+            }
+            val manager = supportFragmentManager
+            mValuteItemDialogFragment.show(manager, "mValuteItemDialogFragment")
+        }
+    }*/
 
 }
 

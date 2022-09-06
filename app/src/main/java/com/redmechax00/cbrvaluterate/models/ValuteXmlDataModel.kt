@@ -1,6 +1,8 @@
-package com.redmechax00.CbrValuteRate
+package com.redmechax00.cbrvaluterate.models
 
-data class ValuteXmlData(
+import com.redmechax00.cbrvaluterate.utilits.localeValuteName
+
+data class ValuteXmlDataModel(
     var attrID: String = "",
     var charCode: String = "",
     var name: String = "",

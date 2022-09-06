@@ -1,4 +1,4 @@
-package com.redmechax00.CbrValuteRate
+package com.redmechax00.cbrvaluterate.utilits
 
 import android.content.Context
 import android.graphics.drawable.Drawable
@@ -7,6 +7,10 @@ import android.net.NetworkCapabilities
 import android.os.Build
 import android.widget.Toast
 import androidx.appcompat.content.res.AppCompatResources
+import com.redmechax00.cbrvaluterate.R
+import com.redmechax00.cbrvaluterate.models.ValuteModel
+import com.redmechax00.cbrvaluterate.models.ValuteXmlDataModel
+import com.redmechax00.cbrvaluterate.recyclerview.ValuteViewModel
 import kotlinx.coroutines.*
 import java.io.IOException
 import java.net.HttpURLConnection
@@ -44,7 +48,7 @@ fun isNetworkAvailable(): Boolean {
 @OptIn(DelicateCoroutinesApi::class)
 fun parse(
     urlString: String,
-    onSuccess: (listOfValutes: ArrayList<ValuteXmlData>) -> Unit
+    onSuccess: (listOfValutes: ArrayList<ValuteXmlDataModel>) -> Unit
 ): Boolean {
     if (isNetworkAvailable()) {
         val result: Deferred<String?> = GlobalScope.async {
@@ -71,14 +75,14 @@ private fun downloadXml(urlString: String): String? {
 
     val url = URL(urlString)
     val urlConnection = url.openConnection() as HttpURLConnection
-    urlConnection.setReadTimeout(100000)
-    urlConnection.setConnectTimeout(100000)
-    urlConnection.setRequestMethod("GET")
-    urlConnection.setInstanceFollowRedirects(true)
-    urlConnection.setUseCaches(false)
-    urlConnection.setDoInput(true)
+    urlConnection.readTimeout = 100000
+    urlConnection.connectTimeout = 100000
+    urlConnection.requestMethod = "GET"
+    urlConnection.instanceFollowRedirects = true
+    urlConnection.useCaches = false
+    urlConnection.doInput = true
 
-    val responseCode: Int = urlConnection.getResponseCode()
+    val responseCode: Int = urlConnection.responseCode
     if (responseCode == HttpURLConnection.HTTP_OK) { // 200 OK
         try {
             stringXml = urlConnection.inputStream.bufferedReader().readText()
@@ -91,12 +95,12 @@ private fun downloadXml(urlString: String): String? {
 }
 
 private fun parseXML(
-    instream: String,
-    onSuccess: (listOfXmlValutes: ArrayList<ValuteXmlData>) -> Unit
+    inStream: String,
+    onSuccess: (listOfXmlValutes: ArrayList<ValuteXmlDataModel>) -> Unit
 ) {
     try {
         val parser = XmlPullParserHandler()
-        val listOfXmlValutes: ArrayList<ValuteXmlData> = parser.parse(instream)
+        val listOfXmlValutes: ArrayList<ValuteXmlDataModel> = parser.parse(inStream)
         onSuccess(listOfXmlValutes)
 
     } catch (e: IOException) {
@@ -106,11 +110,11 @@ private fun parseXML(
 
 fun updateData(
     viewModel: ValuteViewModel,
-    newData: ArrayList<ValuteXmlData>,
-    onSucces: (updatedData: ArrayList<Valute>) -> Unit
+    newData: ArrayList<ValuteXmlDataModel>,
+    onSuccess: (updatedData: ArrayList<ValuteModel>) -> Unit
 ) {
     viewModel.getListValutes().value?.let { mainData ->
-        mainData.forEachIndexed { index, valute ->
+        mainData.forEach { valute ->
             val charCode = valute.charCode
             for (i in 0 until newData.size) {
                 when (charCode) {
@@ -122,7 +126,7 @@ fun updateData(
                 }
             }
         }
-        onSucces(mainData)
+        onSuccess(mainData)
     }
 }
 
@@ -146,9 +150,7 @@ fun getTodayDate(today: Calendar): String {
         (month).toString()
     }
 
-    val date = "$dd/$mm/$year"
-
-    return date
+    return "$dd/$mm/$year"
 }
 
 fun getValuteSign(charCode: String): String {
@@ -389,7 +391,7 @@ fun getValuteIcon(charCode: String): Drawable? {
         APP_ACTIVITY.getString(R.string.valute_char_code_xdr) -> {
             return AppCompatResources.getDrawable(
                 APP_ACTIVITY,
-                com.google.android.material.R.drawable.ic_mtrl_chip_close_circle
+                R.drawable.ic_valute_unknown
             )
         }
         APP_ACTIVITY.getString(R.string.valute_char_code_sgd) -> {
